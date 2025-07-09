@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;      /* Vertically center */
+            justify-content: center;  /* Horizontally center */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .marketing {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .result {
+            width: 200px;
+            height: 200px;
+            border: 2px solid #000;
+        }
+
+        input {
+            width: 200px;
+            height: 200px;
+            border: 2px solid #000;
+            font-size: 30px;
+        }
+
+        .top {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .controls {
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 40px;
+            height: 40px;
+            margin: 0 100px;
+        }
+
+        .reset button {
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="marketing">
+            <h1>Result</h1>
+            <h1>Delta</h1>
+        </div>
+        <div class="top">
+            <input type="text" class="result" placeholder="Result" readonly>
+            <input type="text" class="input" placeholder="Enter a number" value="1">
+        </div>
+        <div class="bottom">
+            <div class="controls">
+                <button class="increase">+</button>
+                <button class="decrease">-</button>
+            </div>
+            <div class="reset">
+                <button class="all-reset">Reset</button>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        let result = 0;
+        let delta = 1;
+
+        // increment
+        function increment() {
+            result += delta;
+        }
+
+        // decrement 
+        function decrement() {
+            result -= delta;
+        }
+
+        // reset
+        function reset() {
+            result = 0;
+        }
+
+        // DOM elements
+        const resultContainerRef = document.querySelector('.result');
+        const inputRef = document.querySelector('.input');
+        const increaseButtonRef = document.querySelector('.increase');
+        const decreaseButtonRef = document.querySelector('.decrease');
+        const allResetButtonRef = document.querySelector('.all-reset');
+
+        function updateResult() {
+            resultContainerRef.innerHTML = result;
+        }
+
+        // function listeners
+        function listeners() {
+            increaseButtonRef.addEventListener('click', () => {
+                increment();
+                updateResult();
+            })
+
+            decreaseButtonRef.addEventListener('click', () => {
+                decrement();
+                updateResult();
+            })
+
+            allResetButtonRef.addEventListener('click', () => {
+                reset();
+                updateResult();
+            })
+
+            inputRef.addEventListener('change', function(e) {
+                delta = Number(e.target.value);
+            })
+
+        }
+
+        listeners();
+    </script>
+</body>
+</html>
